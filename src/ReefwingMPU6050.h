@@ -22,7 +22,7 @@
 #include <Reefwing_imuTypes.h>
 
 #include "MPU6050_Registers.h"
-#include "MPU6060_Types.h"
+#include "MPU6050_Types.h"
 
 /******************************************************************
  *

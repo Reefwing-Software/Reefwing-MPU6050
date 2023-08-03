@@ -10,6 +10,10 @@
  
    1.0.0    Original Release            31/07/23
 
+   Credit:  This Library is a fork of Arduino-MPU6050
+            ref: https://github.com/jarzebski/Arduino-MPU6050/tree/dev
+            Author: Korneliusz Jarzębski
+
 ******************************************************************/
 
 #include <ReefwingMPU6050.h>

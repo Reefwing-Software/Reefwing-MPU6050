@@ -19,7 +19,7 @@ ReefwingMPU6050 imu;
 int loopFrequency = 0;
 const long displayPeriod = 1000;
 unsigned long previousMillis = 0;
-float temperature = 0.0;
+TempData temperature;
 
 void setup() {
   // Initialise the LSM9DS1 IMU
@@ -47,7 +47,7 @@ void loop() {
   if (millis() - previousMillis >= displayPeriod) {
       
     Serial.print("Temperature: ");
-    Serial.print(temperature);
+    Serial.print(temperature.celsius);
     Serial.print(" °C");
     
     Serial.print("\tLoop Frequency: ");

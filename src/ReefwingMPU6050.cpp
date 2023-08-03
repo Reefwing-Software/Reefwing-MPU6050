@@ -449,7 +449,7 @@ TempData ReefwingMPU6050::readTemperature() {
 
     T = readRegister16(MPU6050_REG_TEMP_OUT_H);
     td.celsius = (float)T/340 + 36.53;
-    td.timeStamp = = micros();
+    td.timeStamp = micros();
 
     return td;
 }

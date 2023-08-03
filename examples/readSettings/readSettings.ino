@@ -26,6 +26,7 @@ void setup() {
 
   if (imu.connected()) {
     Serial.println("MPU6050 IMU Connected."); 
+    imu.calibrateGyro();
   } else {
     Serial.println("MPU6050 IMU Not Detected.");
     while(1);
@@ -33,6 +34,27 @@ void setup() {
   
   Serial.print("\n * Sleep Mode:            ");
   Serial.println(imu.getSleepEnabled() ? "Enabled" : "Disabled");
+
+  Serial.print(" * Motion Interrupt:      ");
+  Serial.println(imu.getIntMotionEnabled() ? "Enabled" : "Disabled");
+
+  Serial.print(" * Zero Motion Interrupt:     ");
+  Serial.println(imu.getIntZeroMotionEnabled() ? "Enabled" : "Disabled");
+
+  Serial.print(" * Free Fall Interrupt:       ");
+  Serial.println(imu.getIntFreeFallEnabled() ? "Enabled" : "Disabled");
+  
+  Serial.print(" * Motion Threshold:          ");
+  Serial.println(imu.getMotionDetectionThreshold());
+
+  Serial.print(" * Motion Duration:           ");
+  Serial.println(imu.getMotionDetectionDuration());
+
+  Serial.print(" * Zero Motion Threshold:     ");
+  Serial.println(imu.getZeroMotionDetectionThreshold());
+
+  Serial.print(" * Zero Motion Duration:      ");
+  Serial.println(imu.getZeroMotionDetectionDuration());
   
   Serial.print(" * Clock Source:          ");
   switch(imu.getClockSource()) {
@@ -53,12 +75,35 @@ void setup() {
     case MPU6050_RANGE_2G:             Serial.println("+/- 2 g"); break;
   }  
 
-  Serial.print(" * Accelerometer offsets: ");
+  Serial.print(" * Gyroscope:         ");
+  switch(imu.getScale()) {
+    case MPU6050_SCALE_2000DPS:        Serial.println("2000 dps"); break;
+    case MPU6050_SCALE_1000DPS:        Serial.println("1000 dps"); break;
+    case MPU6050_SCALE_500DPS:         Serial.println("500 dps"); break;
+    case MPU6050_SCALE_250DPS:         Serial.println("250 dps"); break;
+  } 
+
+  Serial.print(" * Accelerometer Offsets: ");
   Serial.print(imu.getAccelOffsetX());
   Serial.print(" / ");
   Serial.print(imu.getAccelOffsetY());
   Serial.print(" / ");
   Serial.println(imu.getAccelOffsetZ());
+
+  Serial.print(" * Gyroscope Offsets: ");
+  Serial.print(imu.getGyroOffsetX());
+  Serial.print(" / ");
+  Serial.print(imu.getGyroOffsetY());
+  Serial.print(" / ");
+  Serial.println(imu.getGyroOffsetZ());
+
+  Serial.print(" * Accelerometer power delay: ");
+  switch(imu.getAccelPowerOnDelay()) {
+    case MPU6050_DELAY_3MS:            Serial.println("3 ms"); break;
+    case MPU6050_DELAY_2MS:            Serial.println("2 ms"); break;
+    case MPU6050_DELAY_1MS:            Serial.println("1 ms"); break;
+    case MPU6050_NO_DELAY:             Serial.println("0 ms"); break;
+  }  
 }
 
 void loop() { }

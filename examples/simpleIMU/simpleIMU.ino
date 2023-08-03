@@ -31,19 +31,15 @@ void setup() {
   if (imu.connected()) {
     Serial.println("MPU6050 IMU Connected."); 
 
-    imu.start();
     imu.calibrateGyro();
-    imu.calibrateAccel();
-    imu.calibrateMag();
-
     delay(20);
+
     //  Flush the first reading - this is important!
     //  Particularly after changing the configuration.
-    imu.readGyro();
-    imu.readAccel();
-    imu.readMag();
+    imu.readRawGyro();
+    imu.readRawAccel();
   } else {
-    Serial.println("LSM9DS1 IMU Not Detected.");
+    Serial.println("MPU6050 IMU Not Detected.");
     while(1);
   }
 }

@@ -12,7 +12,7 @@
 
 ******************************************************************/
 
-#include <ReefwingLSM9DS1.h>
+#include <ReefwingMPU6050.h>
 
 ReefwingMPU6050 imu;
 

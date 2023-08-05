@@ -14,18 +14,25 @@
             ref: https://github.com/jarzebski/Arduino-MPU6050/tree/dev
             Author: Korneliusz Jarzębski
 
-    Note:  If a volatile variable is bigger than a byte (e.g. a 16 bit 
+    Notes:  
+
+    1. If a volatile variable is bigger than a byte (e.g. a 16 bit 
     int or a 32 bit long), then the microcontroller can not read it in one 
-    step, because it is an 8 bit microcontroller. This means that while your
-    main code section (e.g. your loop) reads the first 8 bits of the variable, 
-    the interrupt might already change the second 8 bits. This will produce 
-    random values for the variable.
+    step, if it is an 8 bit microcontroller (e.g., ATMega328P). This means 
+    that while your main code section (e.g. your loop) reads the first 8 
+    bits of the variable, the interrupt might already change the second 8 
+    bits. This will produce random values for the variable.
+
+    2. This sketch assumes that the MPU6050 INT pin is connected to D2 on
+    the Arduino UNO or Nano (Interrupt 0).
 
 ******************************************************************/
 
 #include <ReefwingMPU6050.h>
 
 ReefwingMPU6050 imu;
+
+const byte interruptPin = 2;
 
 bool ledState = false;
 volatile bool freefallDetected = false;
@@ -60,7 +67,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
   
-  attachInterrupt(0, handleInterrupt, RISING);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), handleInterrupt, RISING);
 }
 
 void handleInterrupt() {

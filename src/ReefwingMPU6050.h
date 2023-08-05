@@ -107,6 +107,7 @@ class ReefwingMPU6050 {
         RawData readRawAccel();
         ScaledData readNormalizeAccel();
         ScaledData readScaledAccel();
+        InertialMessage getInertial();
 
         SensorData data;
         TempData gyroTemp;

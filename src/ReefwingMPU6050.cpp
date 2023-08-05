@@ -593,6 +593,29 @@ void ReefwingMPU6050::updateSensorData() {
     }
 }
 
+InertialMessage ReefwingMPU6050::getInertial() {
+    InertialMessage msg;
+
+    if (dataAvailable()) {
+        ScaledData gyr = readNormalizeGyro();
+        ScaledData acc = readScaledAccel();
+
+        msg.gx = gyr.sx;
+        msg.gy = gyr.sy;
+        msg.gz = gyr.sz; 
+        msg.gTimeStamp = gyr.timeStamp;
+
+        msg.ax = acc.sx;
+        msg.ay = acc.sy;
+        msg.az = acc.sz;
+        msg.aTimeStamp = acc.timeStamp;
+
+        gyroTemp = readTemperature();
+    }
+
+    return msg;
+}
+
 // Fast read 8-bit from register
 uint8_t ReefwingMPU6050::fastRegister8(uint8_t reg) {
     uint8_t value;

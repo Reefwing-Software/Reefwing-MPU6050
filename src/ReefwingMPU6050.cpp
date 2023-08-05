@@ -603,12 +603,11 @@ InertialMessage ReefwingMPU6050::getInertial() {
         msg.gx = gyr.sx;
         msg.gy = gyr.sy;
         msg.gz = gyr.sz; 
-        msg.gTimeStamp = gyr.timeStamp;
+        msg.timeStamp = gyr.timeStamp;
 
         msg.ax = acc.sx;
         msg.ay = acc.sy;
         msg.az = acc.sz;
-        msg.aTimeStamp = acc.timeStamp;
 
         gyroTemp = readTemperature();
     }

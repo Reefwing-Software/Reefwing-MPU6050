@@ -29,11 +29,6 @@ float pitch = 0;
 float roll = 0;
 float yaw = 0;
 
-//  Display and Loop Frequency
-int loopFrequency = 0;
-const long displayPeriod = 1000;
-unsigned long previousMillis = 0;
-
 void setup() {
   // Initialise the MPU6050 IMU
   imu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G);
@@ -67,38 +62,18 @@ void loop() {
 
   //    Calculate Pitch, Roll and Yaw
   //    Need to integrate gyro rates (DPS) to get Degrees
-  pitch = pitch + norm.YAxis * timeStep;
-  roll = roll + norm.XAxis * timeStep;
-  yaw = yaw + norm.ZAxis * timeStep;
+  pitch = pitch + norm.sy * timeStep;
+  roll = roll + norm.sx * timeStep;
+  yaw = yaw + norm.sz * timeStep;
+
+  Serial.print("Roll: ");
+  Serial.print(roll);
+  Serial.print("\tPitch: ");
+  Serial.print(pitch);
+  Serial.print("\tYaw: ");
+  Serial.print(yaw);
+  Serial.println(" Degrees");
 
   //    Wait for full timeStep period, blocking
   delay((timeStep * 1000) - (millis() - timer));
-
-  if (millis() - previousMillis >= displayPeriod) {
-    //  Display sensor data every displayPeriod, non-blocking
-    Serial.print("Gyro X: ");
-    Serial.print(norm.sx);
-    Serial.print("\tGyro Y: ");
-    Serial.print(norm.sy);
-    Serial.print("\tGyro Z: ");
-    Serial.print(norm.sz);
-    Serial.print(" DPS");
-  
-    Serial.print("\tLoop Frequency: ");
-    Serial.print(loopFrequency);
-    Serial.println(" Hz");
-
-    Serial.print("Roll: ");
-    Serial.print(roll);
-    Serial.print("\tPitch: ");
-    Serial.print(pitch);
-    Serial.print("\tYaw: ");
-    Serial.print(yaw);
-    Serial.println(" Degrees");
-
-    loopFrequency = 0;
-    previousMillis = millis();
-  }
-
-  loopFrequency++;
 }

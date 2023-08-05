@@ -81,3 +81,6 @@ The best way to understand how to use the Reefwing library is to look at the ske
 - `freeFallDetection.ino` - demonstrates the MPU6050 free fall detection function. Requires connection of the interrupt pin.
 - `xIMU3_Data_Visualisation.ino` - real-time data from MPU6500 IMU, streamed and displayed on the [x-IMU3 GUI](https://x-io.co.uk/x-imu3/#downloads) application.
 
+## Dependencies
+
+This library needs the [Reefwing_imuTypes](https://github.com/Reefwing-Software/Reefwing-imuTypes) library installed as well. If you want to run the xIMU3_Data_Visualisation sketch, you will also need to install the [Reefwing_xIMU3](https://github.com/Reefwing-Software/Reefwing-xIMU3) library.

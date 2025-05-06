@@ -326,7 +326,6 @@ RawData ReefwingMPU6050::readRawAccel() {
 
     Wire.endTransmission();
 
-    Wire.beginTransmission(mpuAddress);
     Wire.requestFrom(mpuAddress, 6);
 
     while (Wire.available() < 6);
@@ -389,7 +388,6 @@ RawData ReefwingMPU6050::readRawGyro() {
 
     Wire.endTransmission();
 
-    Wire.beginTransmission(mpuAddress);
     Wire.requestFrom(mpuAddress, 6);
 
     while (Wire.available() < 6);
@@ -628,7 +626,6 @@ uint8_t ReefwingMPU6050::fastRegister8(uint8_t reg) {
 
     Wire.endTransmission();
 
-    Wire.beginTransmission(mpuAddress);
     Wire.requestFrom(mpuAddress, 1);
 
     #if ARDUINO >= 100
@@ -656,7 +653,6 @@ uint8_t ReefwingMPU6050::readRegister8(uint8_t reg) {
 
     Wire.endTransmission();
 
-    Wire.beginTransmission(mpuAddress);
     Wire.requestFrom(mpuAddress, 1);
     while(!Wire.available()) {};
 
@@ -699,7 +695,6 @@ int16_t ReefwingMPU6050::readRegister16(uint8_t reg) {
 
     Wire.endTransmission();
 
-    Wire.beginTransmission(mpuAddress);
     Wire.requestFrom(mpuAddress, 2);
     while(!Wire.available()) {};
 

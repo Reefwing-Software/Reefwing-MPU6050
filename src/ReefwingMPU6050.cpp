@@ -4,10 +4,11 @@
   @author     David Such
   @copyright  Please see the accompanying LICENSE file
   
-   Version:     1.0.0
-   Date:        31/07/23
+   Version:     1.0.1
+   Date:        22/11/26
  
    1.0.0    Original Release            31/07/23
+   1.0.1    Fix connected() at 0x69     22/11/26
 
    Credit:  This Library is a fork of Arduino-MPU6050
             ref: https://github.com/jarzebski/Arduino-MPU6050/tree/dev
@@ -45,8 +46,8 @@ bool ReefwingMPU6050::begin(GyroScale scale, AccelScale range, int mpua) {
     actualThreshold = 0;
 
     // Check MPU6050 Who Am I Register
-    if (fastRegister8(MPU6050_REG_WHO_AM_I) != 0x68) {
-	    return false;
+    if (!connected()) {
+        return false;
     }
 
     // Set Clock Source
@@ -63,7 +64,10 @@ bool ReefwingMPU6050::begin(GyroScale scale, AccelScale range, int mpua) {
 }
 
 bool ReefwingMPU6050::connected()  {
-    return (fastRegister8(MPU6050_REG_WHO_AM_I) == mpuAddress);
+    //  WHO_AM_I always returns 0x68 (MPU6050_DEVICE_ID), even when the
+    //  device is on the alternate I2C address 0x69 (AD0 high), so it
+    //  must not be compared against mpuAddress.
+    return (fastRegister8(MPU6050_REG_WHO_AM_I) == MPU6050_DEVICE_ID);
 }
 
 void ReefwingMPU6050::setScale(GyroScale scale) {

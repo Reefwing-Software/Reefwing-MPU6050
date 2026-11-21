@@ -64,7 +64,8 @@ There are no external pull-ups on the SDA and SCL pins of the Arduino Nano. Ther
 
 Our library is a fork of the [Arduino-MPU6050](https://github.com/jarzebski/Arduino-MPU6050/tree/dev) library written by Korneliusz Jarzębski, with some new methods:
 
-- `bool connected()` - indicates that the MPU-6050 has been detected;
+- `bool begin(GyroScale scale, AccelScale range, int mpua)` - initialises the IMU. All parameters are optional and default to `MPU6050_SCALE_2000DPS`, `MPU6050_RANGE_2G` and `MPU6050_ADDRESS` (`0x68`). Pass `0x69` as the third argument if the AD0 pin is tied high. Returns `false` if the device is not detected;
+- `bool connected()` - indicates that the MPU-6050 has been detected. This reads the `WHO_AM_I` register, which returns `0x68` regardless of which I²C address the device is on (see the [MPU-6000/6050 Register Map](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Register-Map.pdf), section 4.32);
 - `bool dataAvailable()` - new IMU data is available to be read;
 - `void updateSensorData()` - updates the public SensorData struct (called data);
 - `InertialMessage getInertial()` - returns IMU data suitable for transmission to the xIMU3 Data Visualisation application;
@@ -80,6 +81,11 @@ The best way to understand how to use the Reefwing library is to look at the ske
 - `gyroRollPitchYaw.ino` - simple gyroscope based AHRS displayed on the Arduino IDE Serial Monitor.
 - `freeFallDetection.ino` - demonstrates the MPU6050 free fall detection function. Requires connection of the interrupt pin.
 - `xIMU3_Data_Visualisation.ino` - real-time data from MPU6500 IMU, streamed and displayed on the [x-IMU3 GUI](https://x-io.co.uk/x-imu3/#downloads) application.
+
+## Version History
+
+- `1.0.1` - Fixed `connected()` returning `false` for a working sensor at I²C address `0x69` (AD0 high). It compared the `WHO_AM_I` value with the bus address, but the chip returns `0x68` on either address. `begin()` now uses `connected()` and both compare against the `MPU6050_DEVICE_ID` constant.
+- `1.0.0` - Original release.
 
 ## Dependencies
 

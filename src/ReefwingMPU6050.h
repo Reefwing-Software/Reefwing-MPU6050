@@ -17,7 +17,7 @@
  ******************************************************************/
 
 #ifndef ReefwingMPU6050_h
-#define ReefwingMPU5060_h
+#define ReefwingMPU6050_h
 
 #include <Arduino.h>
 #include <Reefwing_imuTypes.h>

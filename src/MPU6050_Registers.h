@@ -5,10 +5,11 @@
   @copyright  Please see the accompanying LICENSE file
 
   Code:        David Such
-  Version:     1.0.0
-  Date:        31/07/23
+  Version:     1.0.1
+  Date:        22/11/26
 
   1.0.0     Original Release.       31/07/23
+  1.0.1     Added MPU6050_DEVICE_ID 22/11/26
 
 ******************************************************************/
 
@@ -56,3 +57,9 @@
 #define MPU6050_REG_PWR_MGMT_1        0x6B 
 
 #define MPU6050_REG_WHO_AM_I          0x75 
+
+//  Value returned by the WHO_AM_I register (bits 6:1 of the device
+//  address, 0x68). This is fixed regardless of the AD0 pin state,
+//  so it is NOT the same as the I2C bus address when AD0 is high (0x69).
+//  Ref: MPU-6000/MPU-6050 Register Map, section 4.32.
+#define MPU6050_DEVICE_ID             0x68

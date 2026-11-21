@@ -84,6 +84,7 @@ The best way to understand how to use the Reefwing library is to look at the ske
 
 ## Version History
 
+- `1.0.2` - Fixed the include guard in `ReefwingMPU6050.h`, which defined `ReefwingMPU5060_h` instead of `ReefwingMPU6050_h` and so never prevented a double include.
 - `1.0.1` - Fixed `connected()` returning `false` for a working sensor at I²C address `0x69` (AD0 high). It compared the `WHO_AM_I` value with the bus address, but the chip returns `0x68` on either address. `begin()` now uses `connected()` and both compare against the `MPU6050_DEVICE_ID` constant.
 - `1.0.1` - Removed redundant `Wire.beginTransmission()` calls before `Wire.requestFrom()` in the register read helpers (thanks to [IsaacAneek](https://github.com/IsaacAneek), [#3](https://github.com/Reefwing-Software/Reefwing-MPU6050/pull/3)).
 - `1.0.0` - Original release.

@@ -4,11 +4,12 @@
   @author     David Such
   @copyright  Please see the accompanying LICENSE file
   
-   Version:     1.0.1
+   Version:     1.0.2
    Date:        22/11/26
  
    1.0.0    Original Release            31/07/23
    1.0.1    Fix connected() at 0x69     22/11/26
+   1.0.2    Fix include guard typo      22/11/26
 
    Credit:  This Library is a fork of Arduino-MPU6050
             ref: https://github.com/jarzebski/Arduino-MPU6050/tree/dev

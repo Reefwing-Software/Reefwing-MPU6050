@@ -5,11 +5,12 @@
   @copyright  Please see the accompanying LICENSE file
 
   Code:       David Such
-  Version:    1.0.1
+  Version:    1.0.2
   Date:       22/11/26
 
   1.0.0   Original Release.           31/07/23
   1.0.1   Version bump only.          22/11/26
+  1.0.2   Version bump only.          22/11/26
 
 ******************************************************************/
 
